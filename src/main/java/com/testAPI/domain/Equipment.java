@@ -5,22 +5,27 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipment_model")
-public class EquipmentModel implements Serializable {
+@Table(name = "equipment")
+public class Equipment implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @ManyToOne
+    @JoinColumn(name = "equipment_model_id")
+    private EquipmentModel equipmentModel;
     @Column(name = "name")
     private String name;
 
-
-    public EquipmentModel() {
+    public Equipment() {
     }
 
-    public EquipmentModel(Long id, String name) {
+    public Equipment(Long id, String name) {
+    }
+
+    public Equipment(Long id, EquipmentModel equipmentModel, String name) {
         this.id = id;
+        assert false;
+        this.equipmentModel.setId(equipmentModel.getId());
         this.name = name;
     }
 
@@ -30,6 +35,14 @@ public class EquipmentModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public EquipmentModel getEquipmentModel() {
+        return equipmentModel;
+    }
+
+    public void setEquipmentModel(EquipmentModel equipmentModel) {
+        this.equipmentModel = equipmentModel;
     }
 
     public Long getId() {
@@ -44,8 +57,8 @@ public class EquipmentModel implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EquipmentModel that = (EquipmentModel) o;
-        return Objects.equals(id, that.id);
+        Equipment equipment = (Equipment) o;
+        return Objects.equals(id, equipment.id);
     }
 
     @Override
