@@ -1,4 +1,4 @@
-package com.testAPI.exception.resource;
+package com.testAPI.resource;
 
 import com.testAPI.domain.EquipmentPositionHistory;
 import com.testAPI.dto.EquipmentPositionHistoryDTO;
